@@ -91,41 +91,29 @@
                 </configuration>
             </plugin>
             
+            <!-- Only annotations are used so there are no descriptor files -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-plugin-plugin</artifactId>
-                <version>3.2</version>
+                <version>3.4</version>
                 <configuration>
-                    <!--
-                    <goalPrefix>configurator</goalPrefix>
-                    -->
+                    <skipErrorNoDescriptorsFound>true</skipErrorNoDescriptorsFound>
                 </configuration>
-                <!-- This shouldn't be necessary but still is because of http://jira.codehaus.org/browse/MNG-5346 -->
-                <executions>
-                    <execution>
-                        <id>default-descriptor</id>
-                        <goals>
-                            <goal>descriptor</goal>
-                        </goals>
-                        <phase>process-classes</phase>
-                    </execution>
-                    <execution>
-                        <id>help-descriptor</id>
-                        <goals>
-                            <goal>helpmojo</goal>
-                        </goals>
-                        <phase>process-classes</phase>
-                    </execution>
-                    <execution>
-                        <id>help-site</id>
-                        <goals>
-                            <goal>xdoc</goal>
-                        </goals>
-                        <phase>install</phase>
-                    </execution>
-                </executions> 
             </plugin>
+ 
 
+            <!-- Maven-plugin-plugin produces HelpMojo.java file which has
+                 invalid Javadoc syntax. https://issues.apache.org/jira/browse/MPLUGIN-244 
+                 As a workaround for this we turn off Javadoc doclint so that 
+                 Javadoc generation will not fail on this error.           -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.10.3</version>
+                <configuration>
+                    <additionalparam>-Xdoclint:none</additionalparam>
+                </configuration>
+            </plugin>
 
             <!--  Publish the Maven Site docs to Github static pages.
                   Execute this command to generate and publish site docs:
@@ -168,6 +156,7 @@
     
     <reporting>
         <plugins>
+            <!--
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-plugin-plugin</artifactId>
@@ -179,6 +168,7 @@
                     </requirements>                    
                 </configuration>
             </plugin>
+            -->
             
             <!--
             <plugin>
