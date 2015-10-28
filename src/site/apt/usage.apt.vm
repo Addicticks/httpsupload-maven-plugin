@@ -1,0 +1,132 @@
+ ------
+ Usage
+ ------
+ Addicticks
+ ------
+ YYYY-MM-DD
+ ------
+
+
+HTTPS Upload Plugin - Usage
+
+  
+* Determining what the server endpoint accepts
+
+  In order to use the plugin you'll need to know a little about what the endpoint
+  you plan to upload to actually accepts in terms of field names.
+
+  Most often the server will expose some kind of html form and the easiest way
+  to figure out what field names are used is to peak at such a file. Suppose
+  the endpoint's upload html file looks like this:
+
++----
+<html lang="en">
+    <head>
+        <title>File Upload</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+    <body>
+        <form method="POST" action="upload" enctype="multipart/form-data" >
+            File: <input type="file" name="file" id="fff" /> <br/>
+            Destination: <input type="text" name="destination" value="/tmp"/>
+            </br>
+            <input type="submit" value="Upload" name="upload" id="upload" />
+        </form>
+    </body>
+</html>
++----
+
+  From this we can see the server accepts a single file to be uploaded into a field
+  called <<<file>>>. In addition it also supports a plain text field called 
+  <<<destination>>>.
+
+  If you don't have such information available to you then there are other options:
+
+  [[1]] You can guess about those field names. Quite often a field of type <<<file>>>
+        often has a field name of ...tada ... <<<file>>>. If the endpoint accepts multiple
+        files then those names are very likely to be <<<file1>>>, <<<file2>>>, ... <<<fileN>>>.
+
+  [[1]] Ask the administrator of the endpoint for this information.
+
+  [[1]] Upload a file from your browser and use your browser's network inspector to
+        see what is actually being sent.
+
+* Simple usage example
+
+  Uploading a single file. The file in <<<file>>> is uploaded 
+  to <<<targetURL>>>.
+
++---
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>${project.artifactId}</artifactId>
+                <version>${project.version}</version>
+                <executions>
+                    <execution>
+                        <id>my-upload</id>
+                        <phase>deploy</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                        <configuration>
+                            <file>C://alt/data.txt</file>
+                            <targetURL>http://solar.mycompany.org/upload</targetURL>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
++---
+
+  Default settings will apply: File will be uploaded into a form field name of <<<file>>> and the MIME type used
+  in the file upload will be derived from the file name.
+
+
+* Complex usage example (multiple files, extra fields)
+
+  Under construction ...
+
+* Endpoint requires authentication
+
+  The plugin can upload to an endpoint that requires authentication.
+  This is controlled by <<<useAuthentication>>> parameter. 
+  As is normal for Maven plugins credential information is not configured in the plugin
+  itself but in the <<<\<servers\>>>> section of <<<settings.xml>>>.  
+
+  If <<<useAuthentication>>> is <<<true>>> then the plugin will search the Maven settings
+  for a server with an <<<id>>> that matches
+  the hostname (in lowercase) of the <<<targetURL>>> you are uploading to.  For this
+  reason remember to specify the <<<id>>> in lowercase.
+
+  If such a match is found then the plugin will send along
+  the username and password from the Maven settings.
+
+  As an example suppose you have the following in your <<<settings.xml>>>:
+
++---
+    <servers>
+        <server>
+            <id>fileuploadsite.com</id>
+            <username>johnny</username>
+            <password>foxtrot</password>
+        </server>
+    </servers>
++---
+
+  and you're uploading to <<<http://fileuploadsite.com/personal/mupload>>> then the plugin
+  will send along the username and password as specified above.
+
+  Note that currently only auth type <Basic> is supported.
+
+* Disabling certificate verification (https)
+
+  Sometimes when dealing with a HTTPS site it may to useful to turn off certificate
+  validation, for example if the endpoint uses a self-signed certificate and you 
+  trust the endpoint. Self-signed certificates are often used on intranets.
+
+  Certificate validation can be turned off by using the <<<validateCertificate>>>
+  parameter. This will disable certificate chain verification as well as 
+  hostname verification.

@@ -1,0 +1,60 @@
+ ------
+ Introduction
+ ------
+ Addicticks
+ ------
+ YYYY-MM-DD
+ ------
+
+
+HTTPS Upload Plugin
+
+  Uploads file(s) to a remote server using HTTP or HTTPS. Files are uploaded using
+  <<<multipart/form-data>>> encoding (RFC2388). This is what almost all sites that accepts
+  file upload uses.
+
+  The plugin is not meant for uploading artifacts to Maven Repositories. Maven does
+  that brilliantly by itself. The plugin is meant for uploading <any file> (not just project's
+  artifacts) to <any type of endpoint> that accepts a HTTP/HTTPS file upload.
+
+  The plugin is based on the {{{https://github.com/addicticks/httpsupload/}HTTPS Upload Library}}.
+
+
+* Features
+
+  * Upload into any server that accepts <<<multipart/form-data>>> encoded file uploads.
+
+  * Supports both HTTP or HTTPS
+
+  * Support for servers that require authentication (only auth mode Basic is supported)
+
+  * Upload multiple files in one operation (if the endpoint supports it)
+
+  * Support for sending additional fields with the files
+
+  * Certificate verification can be turned off (relevant for HTTPS only)
+
+  * Upload very large files without exhausting JVM memory
+
+
+* Goals Overview
+
+  General information about the goals.
+
+  * {{{./single-mojo.html}httpsupload:single}} Uploads a single file.
+
+  * {{{./multiple-mojo.html}httpsupload:multiple}} Uploads multiple file.
+  
+
+* Usage
+
+  General instructions on how to use the HTTPS Upload Plugin can be found on the {{{./usage.html}usage page}}. 
+
+  If you feel like the plugin is missing a feature or has a defect, you can fill a feature request or bug report in our
+  {{{https://github.com/addicticks/httpsupload/}GitHub issue tracker}}. When creating a new issue, please provide a comprehensive description of your
+  concern. Especially for fixing bugs it is crucial that the developers can reproduce your problem. For this reason,
+  entire debug logs, POMs or most preferably little demo projects attached to the issue are very much appreciated.
+  Of course, patches are welcome, too. Contributors can check out the project from our
+  {{{source-repository.html}source repository}} and will find supplementary information in the
+  {{{http://maven.apache.org/guides/development/guide-helping.html}guide to helping with Maven}}. 
+

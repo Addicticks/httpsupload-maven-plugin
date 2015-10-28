@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright 2014 Addicticks.
+
+This source code file is the property of Addicticks (the company). 
+You are not allowed to view, edit, copy, re-use or re-engineer 
+this source code file unless specifically permissioned by Addicticks.
+-->
+<project name="httpsupload-maven-plugin">
+  <body>
+    <menu name="Overview">
+      <item name="Introduction" href="index.html"/>
+      <item name="Goals" href="plugin-info.html"/>
+      <item name="Usage" href="usage.html"/>
+    </menu>
+   
+  </body>
+</project>
