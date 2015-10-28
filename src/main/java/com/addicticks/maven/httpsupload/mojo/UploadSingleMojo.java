@@ -23,7 +23,6 @@ import java.util.HashMap;
 import java.util.Map;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
-import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 
@@ -35,9 +34,7 @@ import org.apache.maven.plugins.annotations.Parameter;
  * 
  * @author Addicticks
  */
-@Mojo(  name = "single",
-        requiresProject = true,
-        defaultPhase = LifecyclePhase.DEPLOY)
+@Mojo(  name = "single", requiresProject = false)
 public class UploadSingleMojo extends UploadAbstractMojo  {
     
     /**

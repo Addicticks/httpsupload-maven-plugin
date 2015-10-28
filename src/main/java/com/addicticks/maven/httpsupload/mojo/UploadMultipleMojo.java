@@ -23,7 +23,6 @@ import java.util.List;
 import java.util.Map;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
-import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 
@@ -37,9 +36,7 @@ import org.apache.maven.plugins.annotations.Parameter;
  * 
  * @author Addicticks
  */
-@Mojo(  name = "multiple",
-        requiresProject = true,
-        defaultPhase = LifecyclePhase.DEPLOY)
+@Mojo(  name = "multiple", requiresProject = false)
 public class UploadMultipleMojo extends UploadAbstractMojo   {
 
     
