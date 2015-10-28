@@ -6,6 +6,7 @@
     <version>0.9.1-SNAPSHOT</version>
     <packaging>maven-plugin</packaging>
     <name>HTTPS Upload Maven Plugin</name>
+    <url>https://github.com/Addicticks/httpsupload-maven-plugin</url>
     
     <description>
         Maven plugin which allows to upload one or several files
@@ -157,32 +158,11 @@
     
     <reporting>
         <plugins>
-            <!--
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-plugin-plugin</artifactId>
                 <version>3.4</version>
-                <configuration>
-                    <detail>yes</detail>
-                    <requirements>
-                        <jdk>1.7</jdk>
-                    </requirements>                    
-                </configuration>
             </plugin>
-            -->
-            
-            <!--
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <version>2.4</version>
-            </plugin>
-            -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jxr-plugin</artifactId>
-                <version>2.1</version>
-            </plugin>        
         </plugins>
     </reporting>   
     
