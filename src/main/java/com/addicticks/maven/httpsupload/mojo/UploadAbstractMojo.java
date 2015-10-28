@@ -110,6 +110,9 @@ public abstract class UploadAbstractMojo extends AbstractMojo implements UploadP
     /**
      * Read timeout (in milliseconds) to use when reading from the endpoint. This
      * is the time from the upload has completed until the server responds.
+     * 
+     * <p>You may have to increase this parameter if the endpoint takes a long
+     * time to process the uploaded data.
      */
     @Parameter(required = false, defaultValue="10000")
     protected int readTimeoutMs;

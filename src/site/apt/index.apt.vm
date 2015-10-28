@@ -36,6 +36,8 @@ HTTPS Upload Plugin
 
   * Upload very large files without exhausting JVM memory
 
+  * Uses reasonable timeouts which means it may fail but it never hangs
+
 
 * Goals Overview
 
