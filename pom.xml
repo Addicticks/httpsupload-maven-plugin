@@ -110,6 +110,32 @@
                     </execution>
                 </executions> 
             </plugin>
+
+
+            <!--  Publish the Maven Site docs to Github static pages.
+                  Execute this command to generate and publish site docs:
+                  mvn clean site scm-publish:publish-scm
+                  
+                  Unfortunately, and ugly, currently the maven-scm-publish-plugin
+                  cannot use an embedded git client, which means a git client
+                  must be available in PATH.
+                                                                       -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-scm-publish-plugin</artifactId>
+                <version>1.1</version>
+                <configuration>
+                    <checkoutDirectory>${project.build.directory}/scmpublish</checkoutDirectory>
+                    <checkinComment>Publishing Maven site docs for ${project.artifactId}:${project.version}</checkinComment>
+                    <content>${project.reporting.outputDirectory}</content>
+                    <skipDeletedFiles>true</skipDeletedFiles>
+                    <pubScmUrl>scm:git:https://github.com/Addicticks/httpsupload-maven-plugin.git</pubScmUrl>
+                    <scmBranch>gh-pages</scmBranch> 
+                </configuration>
+            </plugin>
+
+
+
         </plugins>
     </build>
     

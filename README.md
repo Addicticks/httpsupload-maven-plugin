@@ -9,6 +9,8 @@ artifacts) to *any type of endpoint* that accepts a HTTP/HTTPS file upload.
 
 ## Documentation
 
+See [Plugin Documentation](http://addicticks.github.io/httpsupload-maven-plugin/) for more information.
+
 
 ## Availability
 
