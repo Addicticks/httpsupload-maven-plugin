@@ -36,6 +36,8 @@ import org.apache.maven.settings.Settings;
  * @author Addicticks
  */
 public abstract class UploadAbstractMojo extends AbstractMojo implements UploadProgress {
+    
+    private static final long SIZE_1MB = (1024*1024);
 
     /**
      * The URL to upload the file(s) to. Must be either HTTP or HTTPS protocol.
@@ -156,9 +158,10 @@ public abstract class UploadAbstractMojo extends AbstractMojo implements UploadP
 
     /**
      * Can be used to turn off upload progress logging (if parameter value is {@code false}).
-     * By default upload progress logging is enabled.
+     * By default upload progress logging is enabled. Progress logging can be
+     * a bit 'chatty'.
      * 
-     * <p>Files larger than 800 Kbytes will see a log entry for every one percent 
+     * <p>Files larger than 100 MBytes will see a log entry for every one percent 
      * uploaded. For files less this size there will be proportionally less log
      * entries.
      * 
@@ -182,7 +185,25 @@ public abstract class UploadAbstractMojo extends AbstractMojo implements UploadP
     @Override
     public void uploadProgress(File file, long totalSize, int pct) {
         if (indicateProgress) {
-            getLog().info("Uploading " + file + ":  " + pct + " pct");
+            boolean doPrint = false;
+            if (totalSize > (100 * SIZE_1MB)) {
+                doPrint = true;
+            } else if (totalSize > (50 * SIZE_1MB)) {
+                if ( (totalSize % 10) == 0) {
+                    doPrint = true;
+                }
+            } else if (totalSize > (10 * SIZE_1MB)) {
+                if ( (totalSize % 25) == 0) {
+                    doPrint = true;
+                }
+            } else {
+                if ( pct == 50) {
+                    doPrint = true;
+                }
+            }
+            if (doPrint || pct == 0 || pct == 100) {
+                getLog().info("Uploading " + file + ":  " + pct + " pct");
+            }
         }
     }
 
