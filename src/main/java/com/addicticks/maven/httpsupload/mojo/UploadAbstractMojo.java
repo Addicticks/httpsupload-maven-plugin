@@ -202,7 +202,7 @@ public abstract class UploadAbstractMojo extends AbstractMojo implements UploadP
                 }
             }
             if (doPrint || pct == 0 || pct == 100) {
-                getLog().info("Uploading " + file + ":  " + pct + " pct");
+                getLog().info("Uploading " + file + ":  " + pct + " pct completed.");
             }
         }
     }
