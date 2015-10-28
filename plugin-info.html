@@ -28,7 +28,7 @@
         
                 <div class="xleft">
         <span id="publishDate">Last Published: 2015-10-28</span>
-                  &nbsp;| <span id="projectVersion">Version: 0.9.2-SNAPSHOT</span>
+                  &nbsp;| <span id="projectVersion">Version: 1.0.0</span>
                       </div>
             <div class="xright">        
         
@@ -62,11 +62,13 @@
     </div>
     <div id="bodyColumn">
       <div id="contentBox">
-        <div class="section"><h2>Plugin Documentation<a name="Plugin_Documentation"></a></h2><a name="Plugin_Documentation"></a><p>Goals available for this plugin:</p><table border="0" class="bodyTable"><tr class="a"><th>Goal</th><th>Description</th></tr><tr class="b"><td><a href="multiple-mojo.html">httpsupload:multiple</a></td><td>Uploads multiple file to a remote server using HTTP or HTTPS. This
+        <div class="section"><h2>Plugin Documentation<a name="Plugin_Documentation"></a></h2><a name="Plugin_Documentation"></a><p>Goals available for this plugin:</p><table border="0" class="bodyTable"><tr class="a"><th>Goal</th><th>Description</th></tr><tr class="b"><td><a href="help-mojo.html">httpsupload:help</a></td><td>Display help information on httpsupload-maven-plugin.<br />
+Call <code>mvn httpsupload:help -Ddetail=true
+-Dgoal=&lt;goal-name&gt;</code> to display parameter details.</td></tr><tr class="a"><td><a href="multiple-mojo.html">httpsupload:multiple</a></td><td>Uploads multiple file to a remote server using HTTP or HTTPS. This
 goal should only be used with servers that accepts <i>multiple</i>
 file to be uploaded in a single operation. 
 <p>Files are sent using POST method and using
-<code>multipart/form-data</code> encoding (RFC2388).</p></td></tr><tr class="a"><td><a href="single-mojo.html">httpsupload:single</a></td><td>Uploads a single file to a remote server using HTTP or HTTPS. 
+<code>multipart/form-data</code> encoding (RFC2388).</p></td></tr><tr class="b"><td><a href="single-mojo.html">httpsupload:single</a></td><td>Uploads a single file to a remote server using HTTP or HTTPS. 
 <p>File is sent using POST method and using
 <code>multipart/form-data</code> encoding (RFC2388).</p></td></tr></table><div class="section"><h3>System Requirements<a name="System_Requirements"></a></h3><a name="System_Requirements"></a><p>The following specifies the minimum requirements to run this Maven plugin:</p><table border="0" class="bodyTable"><tr class="a"><td>Maven</td><td>2.0</td></tr><tr class="b"><td>JDK</td><td>1.7</td></tr><tr class="a"><td>Memory</td><td>No minimum requirement.</td></tr><tr class="b"><td>Disk Space</td><td>No minimum requirement.</td></tr></table></div><div class="section"><h3>Usage<a name="Usage"></a></h3><a name="Usage"></a><p>You should specify the version in your project's plugin configuration:</p><div class="source"><pre>&lt;project&gt;
   ...
@@ -77,7 +79,7 @@ file to be uploaded in a single operation.
         &lt;plugin&gt;
           &lt;groupId&gt;com.addicticks.oss.maven&lt;/groupId&gt;
           &lt;artifactId&gt;httpsupload-maven-plugin&lt;/artifactId&gt;
-          &lt;version&gt;0.9.2-SNAPSHOT&lt;/version&gt;
+          &lt;version&gt;1.0.0&lt;/version&gt;
         &lt;/plugin&gt;
         ...
       &lt;/plugins&gt;
@@ -87,7 +89,7 @@ file to be uploaded in a single operation.
       &lt;plugin&gt;
         &lt;groupId&gt;com.addicticks.oss.maven&lt;/groupId&gt;
         &lt;artifactId&gt;httpsupload-maven-plugin&lt;/artifactId&gt;
-        &lt;version&gt;0.9.2-SNAPSHOT&lt;/version&gt;
+        &lt;version&gt;1.0.0&lt;/version&gt;
       &lt;/plugin&gt;
       ...
     &lt;/plugins&gt;

@@ -29,7 +29,7 @@
         
                 <div class="xleft">
         <span id="publishDate">Last Published: 2015-10-28</span>
-                  &nbsp;| <span id="projectVersion">Version: 0.9.2-SNAPSHOT</span>
+                  &nbsp;| <span id="projectVersion">Version: 1.0.0</span>
                       </div>
             <div class="xright">        
         
@@ -67,15 +67,12 @@
   
     <div class="section"><h2>httpsupload:single<a name="httpsupload:single"></a></h2>
       <p><b>Full name</b>:</p>
-      <p>com.addicticks.oss.maven:httpsupload-maven-plugin:0.9.2-SNAPSHOT:single</p>
+      <p>com.addicticks.oss.maven:httpsupload-maven-plugin:1.0.0:single</p>
       <p><b>Description</b>:</p>
       <div>Uploads a single file to a remote server using HTTP or HTTPS. 
 <p>File is sent using POST method and using
 <tt>multipart/form-data</tt> encoding (RFC2388).</p></div>
       <p><b>Attributes</b>:</p>
-      <ul>
-        <li>Requires a Maven project to be executed.</li>
-      </ul>
       <div class="section"><h3>Required Parameters<a name="Required_Parameters"></a></h3>
         <table class="bodyTable" border="0">
           <tr class="a">
@@ -193,8 +190,8 @@ entirely on the server. Typically such a field is named &quot;file&quot;.<br /><
             <td><tt>-</tt></td>
             <td>Can be used to turn off upload progress logging (if parameter value
 is <tt>false</tt>). By default upload progress logging is
-enabled. 
-<p>Files larger than 800 Kbytes will see a log entry for every one
+enabled. Progress logging can be a bit 'chatty'. 
+<p>Files larger than 100 MBytes will see a log entry for every one
 percent uploaded. For files less this size there will be
 proportionally less log entries.</p>
 <p>This parameter will only turn off the actual progress logging
@@ -217,7 +214,9 @@ file name extension using Java's
             <td><tt>-</tt></td>
             <td>Read timeout (in milliseconds) to use when reading from the
 endpoint. This is the time from the upload has completed until the
-server responds.<br /><b>Default value is</b>: <tt>10000</tt>.<br /></td>
+server responds. 
+<p>You may have to increase this parameter if the endpoint takes a
+long time to process the uploaded data.</p><br /><b>Default value is</b>: <tt>10000</tt>.<br /></td>
           </tr>
           <tr class="a">
             <td><b><a href="#useAuthentication">useAuthentication</a></b></td>
@@ -318,8 +317,8 @@ entirely on the server. Typically such a field is named &quot;file&quot;.</div>
         </ul><hr /><p><b><a name="indicateProgress">indicateProgress</a>:</b></p>
         <div>Can be used to turn off upload progress logging (if parameter value
 is <tt>false</tt>). By default upload progress logging is
-enabled. 
-<p>Files larger than 800 Kbytes will see a log entry for every one
+enabled. Progress logging can be a bit 'chatty'. 
+<p>Files larger than 100 MBytes will see a log entry for every one
 percent uploaded. For files less this size there will be
 proportionally less log entries.</p>
 <p>This parameter will only turn off the actual progress logging
@@ -341,7 +340,9 @@ file name extension using Java's
         </ul><hr /><p><b><a name="readTimeoutMs">readTimeoutMs</a>:</b></p>
         <div>Read timeout (in milliseconds) to use when reading from the
 endpoint. This is the time from the upload has completed until the
-server responds.</div>
+server responds. 
+<p>You may have to increase this parameter if the endpoint takes a
+long time to process the uploaded data.</p></div>
         <ul>
           <li><b>Type</b>: <tt>int</tt></li>
           <li><b>Required</b>: <tt>No</tt></li>
