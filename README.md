@@ -14,6 +14,11 @@ See [Plugin Documentation](http://addicticks.github.io/httpsupload-maven-plugin/
 
 ## Availability
 
+The plugin is available from Maven Central.
+
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.addicticks.oss.maven/httpsupload-maven-plugin/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.addicticks.oss.maven/httpsupload-maven-plugin "click me for Maven Central details")
+
+
 
 ### License
 
