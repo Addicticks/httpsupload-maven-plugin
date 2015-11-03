@@ -36,15 +36,16 @@ HTTPS Upload Plugin - Usage
 </html>
 +----
 
-  From this we can see the server accepts a single file to be uploaded into a field
-  called <<<file>>>. In addition it also supports a plain text field called 
-  <<<destination>>>.
+  From this we can see the server accepts a file (or perhaps multiple files?) to 
+  be uploaded into a field called <<<file>>>. In addition it also supports a 
+  plain text field called <<<destination>>>.
 
   If you don't have such information available to you then there are other options:
 
   [[1]] You can guess about those field names. Quite often a field of type <<<file>>>
-        often has a field name of ...tada ... <<<file>>>. If the endpoint accepts multiple
-        files then those names are very likely to be <<<file1>>>, <<<file2>>>, ... <<<fileN>>>.
+        often has a field name of ...tada ... <<<file>>>. If the endpoint accepts
+        multiple files in one upload operation then it is likely that it will 
+        accept them all in the same field name.
 
   [[1]] Ask the administrator of the endpoint for this information.
 
@@ -87,9 +88,48 @@ HTTPS Upload Plugin - Usage
 
 * Complex usage example (multiple files, extra fields)
 
-  Under construction ...
+  In this example multiple files are uploaded in one operation.
+  All files will be uploaded into same field, namely <<<file>>>.
 
-* Endpoint requires authentication
+  A single additional field, <<<destination>>>, is uploaded as well.
+
++---
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>${project.artifactId}</artifactId>
+                <version>${project.version}</version>
+                <executions>
+                    <execution>
+                        <id>my-upload</id>
+                        <phase>deploy</phase>
+                        <goals>
+                            <goal>multiple</goal>
+                        </goals>
+                        <configuration>
+                            <targetURL>https://secure.solar.mycompany.org/upload</targetURL>
+                            <uploadFiles>
+                                <uploadFile>
+                                    <file>e:\\x.txt</file>
+                                </uploadFile>
+                                <uploadFile>
+                                    <file>e:\\x.datdat</file>
+                                    <hintFilename>y.dat</hintFilename>
+                                </uploadFile>
+                            </uploadFiles>
+                            <extraFields>
+                                <destination></destination>
+                            </extraFields>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
++---
+
+* When the endpoint requires authentication
 
   The plugin can upload to an endpoint that requires authentication.
   This is controlled by <<<useAuthentication>>> parameter. 

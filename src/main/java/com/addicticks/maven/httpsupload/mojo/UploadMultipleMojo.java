@@ -18,9 +18,8 @@ package com.addicticks.maven.httpsupload.mojo;
 import com.addicticks.net.httpsupload.HttpsFileUploaderConfig;
 import com.addicticks.net.httpsupload.UploadItem;
 import com.addicticks.net.httpsupload.UploadItemFile;
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.Mojo;
@@ -67,14 +66,13 @@ public class UploadMultipleMojo extends UploadAbstractMojo   {
      * <p>
      * The elements of an <code>uploadFile</code> are as follows:
      * <ul>
-     *    <li><code>formFieldName</code>. The form field name to POST the file to. This value depends entirely on
-     *          the server you're uploading to. Typically such a field is named "file" 
-     *          or if multiple files are allowed: "file1", "file2", etc.
-     *          The value must be unique among the files to be uploaded.
-     *          <br>Type: <code>String</code>, Required: <code>Yes</code>
-     *    </li><br>
      *    <li><code>file</code>. File to upload. 
      *          <br>Type: <code>java.io.File</code>, Required: <code>Yes</code>
+     *    </li><br>
+     *    <li><code>hintFilename</code>. Hint given to the server as to what the 
+     *          server should name the file. If this value is not set explicitly 
+     *          it will be derived from the filename of the {@code file} element.
+     *          <br>Type: <code>String</code>, Required: <code>No</code>
      *    </li><br>
      *    <li><code>mimeType</code>. This is the http <code>Content-Type</code> 
      *          used when the file is uploaded. If not given explicitly here it 
@@ -83,9 +81,12 @@ public class UploadMultipleMojo extends UploadAbstractMojo   {
      *          method.
      *          <br>Type: <code>String</code>, Required: <code>No</code>
      *    </li><br>
-     *    <li><code>hintFilename</code>. Hint given to the server as to what the 
-     *          server should name the file. If this value is not set explicitly 
-     *          it will be derived from the filename of the {@code file} element.
+     *    <li><code>formFieldName</code>. The form field name to POST the file to. 
+     *          This value depends entirely on
+     *          the server you're uploading to. Typically such a field is named "file".         
+     *          There's no requirement that the value is unique among the files 
+     *          to be uploaded. If you don't know what this value should be
+     *          then leave it out.
      *          <br>Type: <code>String</code>, Required: <code>No</code>
      *    </li>
      * </ul>
@@ -109,7 +110,7 @@ public class UploadMultipleMojo extends UploadAbstractMojo   {
         HttpsFileUploaderConfig config = getConfig();
 
       
-        Map<String, UploadItem> newMap = new HashMap<>();
+        List<UploadItem> newList = new ArrayList<>();
         if (uploadFiles != null) {
             for (UploadFile e : uploadFiles) {
                 
@@ -136,13 +137,12 @@ public class UploadMultipleMojo extends UploadAbstractMojo   {
                     f = new UploadItemFile(
                             e.getFile());
                 }
-                if (newMap.put(e.getFormFieldName(), f) != null) {
-                    throw new MojoExecutionException("The value for formFieldName must be unique among uploadFiles. (value = \"" + e.getFormFieldName() + "\")");
-                }
+                f.setFormFieldName(e.getFormFieldName());
+                newList.add(f);
             }
         }
         
-        upload(config, newMap, extraFields);
+        upload(config, newList, extraFields);
     }
 
     

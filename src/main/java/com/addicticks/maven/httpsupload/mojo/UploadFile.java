@@ -37,7 +37,8 @@ public class UploadFile {
      * the server. Typically such a field is named "file". 
      * 
      * <p>
-     * This value must be unique among the files to be uploaded.
+     * There's no requirement that this value is unique among the files to be 
+     * uploaded.
      */
     @Parameter(required=true)
     private String formFieldName;

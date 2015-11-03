@@ -19,8 +19,9 @@ import com.addicticks.net.httpsupload.HttpsFileUploaderConfig;
 import com.addicticks.net.httpsupload.UploadItem;
 import com.addicticks.net.httpsupload.UploadItemFile;
 import java.io.File;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.Mojo;
@@ -71,16 +72,18 @@ public class UploadSingleMojo extends UploadAbstractMojo  {
     public void execute() throws MojoExecutionException, MojoFailureException {
         
         HttpsFileUploaderConfig config = getConfig();
-
         
-        Map<String,UploadItem> filesToUpload = new HashMap<>();
+        UploadItem uploadItem;
         if (this.mimeType == null) {
-            filesToUpload.put(formFieldName, new UploadItemFile(file));
+            uploadItem = new UploadItemFile(file);
         } else {
-            filesToUpload.put(formFieldName, new UploadItemFile(file, file.getName(), this.mimeType));
+            uploadItem = new UploadItemFile(file, file.getName(), this.mimeType);
         }
+        uploadItem.setFormFieldName(formFieldName);
         
-        upload(config, filesToUpload, extraFields);
+        upload(config, 
+               Collections.singletonList(uploadItem),
+               extraFields);
     }
 
     

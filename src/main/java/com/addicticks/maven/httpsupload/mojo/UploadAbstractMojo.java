@@ -24,6 +24,7 @@ import com.addicticks.net.httpsupload.Utils;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.Map;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
@@ -247,7 +248,7 @@ public abstract class UploadAbstractMojo extends AbstractMojo implements UploadP
 
     protected void upload(
             HttpsFileUploaderConfig config,
-            Map<String, UploadItem> filesToUpload,
+            List<UploadItem> filesToUpload,
             Map<String, String> otherFields) throws MojoExecutionException {
 
         getLog().info("Uploading to " + targetURL);
