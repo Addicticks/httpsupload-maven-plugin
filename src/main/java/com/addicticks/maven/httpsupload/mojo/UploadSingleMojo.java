@@ -19,9 +19,7 @@ import com.addicticks.net.httpsupload.HttpsFileUploaderConfig;
 import com.addicticks.net.httpsupload.UploadItem;
 import com.addicticks.net.httpsupload.UploadItemFile;
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.Mojo;
@@ -65,6 +63,13 @@ public class UploadSingleMojo extends UploadAbstractMojo  {
     @Parameter(required=false)
     private String mimeType;
 
+    /**
+     * Hint given to the server as to what the server should name the file. If 
+     * this value is not set explicitly it will be derived from the filename
+     * of the {@code file} argument.
+     */
+    @Parameter(required=false)
+    private String hintFilename;
     
     
     
@@ -76,6 +81,8 @@ public class UploadSingleMojo extends UploadAbstractMojo  {
         UploadItem uploadItem;
         if (this.mimeType == null) {
             uploadItem = new UploadItemFile(file);
+        } else if (hintFilename != null) {
+            uploadItem = new UploadItemFile(file, hintFilename, this.mimeType);
         } else {
             uploadItem = new UploadItemFile(file, file.getName(), this.mimeType);
         }
