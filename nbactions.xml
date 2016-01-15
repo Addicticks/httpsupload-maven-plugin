@@ -2,9 +2,9 @@
 <actions>
         <action>
             <actionName>CUSTOM-site</actionName>
-            <displayName>site</displayName>
+            <displayName>site publish</displayName>
             <goals>
-                <goal>site</goal>
+                <goal>site scm-publish:publish-scm</goal>
             </goals>
         </action>
     </actions>
