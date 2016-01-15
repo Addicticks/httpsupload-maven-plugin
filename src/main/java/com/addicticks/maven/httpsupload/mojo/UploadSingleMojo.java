@@ -79,9 +79,7 @@ public class UploadSingleMojo extends UploadAbstractMojo  {
         HttpsFileUploaderConfig config = getConfig();
         
         UploadItem uploadItem;
-        if (this.mimeType == null) {
-            uploadItem = new UploadItemFile(file);
-        } else if (hintFilename != null) {
+        if (hintFilename != null) {
             uploadItem = new UploadItemFile(file, hintFilename, this.mimeType);
         } else {
             uploadItem = new UploadItemFile(file, file.getName(), this.mimeType);
