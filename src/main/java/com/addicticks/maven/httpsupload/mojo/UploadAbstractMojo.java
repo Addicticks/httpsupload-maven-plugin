@@ -255,7 +255,9 @@ public abstract class UploadAbstractMojo extends AbstractMojo implements UploadP
         try {
             HttpsFileUploaderResult result = HttpsFileUploader.upload(config, filesToUpload, extraFields, this);
             if (result.isError()) {
-                throw new MojoExecutionException("Could not upload to " + targetURL + ". Error from server was : " + System.lineSeparator() + result.getResponseText());
+                throw new MojoExecutionException("Could not upload to " + targetURL + ". Error from server was : " 
+                        + System.lineSeparator() + "Status code: " + Utils.getHttpStatusCodeText(result.getHttpStatusCode())
+                        + System.lineSeparator() + result.getResponseTextNoHtml());
             }
         } catch (IOException ex) {
             throw new MojoExecutionException("Error uploading file to " + targetURL.toString(), ex);
