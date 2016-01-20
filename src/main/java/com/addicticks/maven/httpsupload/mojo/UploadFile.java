@@ -39,6 +39,10 @@ public class UploadFile {
      * <p>
      * There's no requirement that this value is unique among the files to be 
      * uploaded.
+     * 
+     * <p>
+     * If a value is not supplied then the names {@code file}, {@code file2},
+     * {@code file3},... and so on, will be used.
      */
     @Parameter(required=true)
     private String formFieldName;

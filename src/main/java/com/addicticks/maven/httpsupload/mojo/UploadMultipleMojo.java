@@ -49,7 +49,6 @@ public class UploadMultipleMojo extends UploadAbstractMojo   {
      * <pre>
      *     &lt;uploadFiles&gt;
      *         &lt;uploadFile&gt;
-     *             &lt;formFieldName&gt;file1&lt;/formFieldName&gt;
      *             &lt;file&gt;${project.build.directory}/myfile.jar&lt;/file&gt;
      *         &lt;/uploadFile&gt;
      *         &lt;uploadFile&gt;
@@ -86,7 +85,9 @@ public class UploadMultipleMojo extends UploadAbstractMojo   {
      *          the server you're uploading to. Typically such a field is named "file".         
      *          There's no requirement that the value is unique among the files 
      *          to be uploaded. If you don't know what this value should be
-     *          then leave it out.
+     *          then leave it out. If no value is supplied then the plugin will automatically
+     *          supply the names {@code file}, {@code file2}, {@code file3},... and so on,
+     *          to those {@code <uploadFile>} elements where no value was supplied.
      *          <br>Type: <code>String</code>, Required: <code>No</code>
      *    </li>
      * </ul>
@@ -147,9 +148,15 @@ public class UploadMultipleMojo extends UploadAbstractMojo   {
 
     
     private void validateUploadFiles() throws MojoExecutionException {
+        int fieldsWithNoName=0;
         for (UploadFile e : uploadFiles) {
             if (e.getFormFieldName() == null || e.getFormFieldName().isEmpty()) {
-                throw new MojoExecutionException("'formFieldName' is required on 'uploadFile'");
+                fieldsWithNoName++;
+                if (fieldsWithNoName == 1) {
+                    e.setFormFieldName("file");
+                } else {
+                    e.setFormFieldName("file" + fieldsWithNoName);
+                }
             }
             if (e.getFile() == null) {
                 throw new MojoExecutionException("'file' is required on 'uploadFile'");
