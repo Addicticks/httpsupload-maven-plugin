@@ -190,14 +190,17 @@ public abstract class UploadAbstractMojo extends AbstractMojo implements UploadP
             if (totalSize > (100 * SIZE_1MB)) {
                 doPrint = true;
             } else if (totalSize > (50 * SIZE_1MB)) {
-                if ( (totalSize % 10) == 0) {
+                // Notify for every 10%
+                if ( (pct % 10) == 0) {
                     doPrint = true;
                 }
             } else if (totalSize > (10 * SIZE_1MB)) {
-                if ( (totalSize % 25) == 0) {
+                // Notify for every 25%
+                if ( (pct % 25) == 0) {
                     doPrint = true;
                 }
             } else {
+                // Notify for every 50%
                 if ( pct == 50) {
                     doPrint = true;
                 }
