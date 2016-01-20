@@ -24,6 +24,8 @@ import com.addicticks.net.httpsupload.Utils;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.text.MessageFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import org.apache.maven.plugin.AbstractMojo;
@@ -206,7 +208,8 @@ public abstract class UploadAbstractMojo extends AbstractMojo implements UploadP
                 }
             }
             if (doPrint || pct == 0 || pct == 100) {
-                getLog().info("Uploading " + file + ":  " + pct + " pct completed.");
+                getLog().info(
+                        MessageFormat.format("Uploading {0} : {1,number,##0} pct completed.", file, pct));
             }
         }
     }
