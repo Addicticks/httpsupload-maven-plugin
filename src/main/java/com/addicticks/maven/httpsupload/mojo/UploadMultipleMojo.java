@@ -77,7 +77,8 @@ public class UploadMultipleMojo extends UploadAbstractMojo   {
      *          used when the file is uploaded. If not given explicitly here it 
      *          will be derived from the file name extension using Java's 
      *          {@link java.net.URLConnection#guessContentTypeFromName(java.lang.String)}
-     *          method.
+     *          method and if this fails then <code>application/octet-stream</code>
+     *          will be used.
      *          <br>Type: <code>String</code>, Required: <code>No</code>
      *    </li><br>
      *    <li><code>formFieldName</code>. The form field name to POST the file to. 

@@ -55,7 +55,8 @@ public class UploadFile {
      * is uploaded. If not given explicitly here it will be derived
      * from the file name extension using Java's 
      * {@link java.net.URLConnection#guessContentTypeFromName(java.lang.String)}
-     * method.
+     * method and if this fails then <code>application/octet-stream</code>
+     * will be used.
      * 
      */
     @Parameter(required=false)
